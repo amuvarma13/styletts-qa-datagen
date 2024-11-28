@@ -37,5 +37,7 @@ def add_audio(example):
     }
 
 ds = ds.map(add_audio, batched=False)
+ds = ds.cast_column("audio", Audio(sampling_rate=16000))
+
 
 ds.push_to_hub(push_name)
