@@ -13,6 +13,7 @@ dsn = "amuvarma/qa_large_0_0"
 push_name = "amuvarma/qa_large_0_0_speechq"
 
 ds = load_dataset(dsn, split='train')
+ds = ds.shuffle(seed=42)
 def add_audio(example):
     text = example['question']
     voice = random.choice(voices)
