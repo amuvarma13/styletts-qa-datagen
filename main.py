@@ -10,5 +10,5 @@ voices = [msinference.compute_style("voices/"+voice) for voice in voices_strings
 voice = random.choice(voices)
 wav = msinference.inference(text, voice, alpha=0.3, beta=0.7, diffusion_steps=7, embedding_scale=1)
 wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
-print(wav_16k)
+print(wav_16k.shape)
 # write('result.wav', 24000, wav)
