@@ -13,6 +13,7 @@ einops
 einops-exts
 tqdm
 typing
+transformers
 typing-extensions
 gradio
 phonemizer
