@@ -21,4 +21,6 @@ tortoise-tts # for the Gradio demo, splitting text
 flask # for api
 markdown # for api
 flask-cors
+datasets
+
 git+https://github.com/resemble-ai/monotonic_align.git # or resemble-monotonic-align
