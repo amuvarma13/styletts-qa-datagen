@@ -14,7 +14,6 @@ einops-exts
 tqdm
 typing
 typing-extensions
-git+https://github.com/resemble-ai/monotonic_align.git # or resemble-monotonic-align
 gradio
 phonemizer
 cached-path
@@ -22,3 +21,4 @@ tortoise-tts # for the Gradio demo, splitting text
 flask # for api
 markdown # for api
 flask-cors
+git+https://github.com/resemble-ai/monotonic_align.git # or resemble-monotonic-align
