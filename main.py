@@ -9,13 +9,13 @@ nltk.download('punkt_tab')
 text = 'Hello world!'
 voices_strings = ["f-us-1.wav", "f-us-2.wav", "f-us-3.wav", "f-us-4.wav", "m-us-1.wav", "m-us-2.wav", "m-us-3.wav", "m-us-4.wav"]
 voices = [msinference.compute_style("voices/"+voice) for voice in voices_strings]
-dsn = "amuvarma/qa-tospeech_4"
-push_name = "amuvarma/qa_large_0_4_speechq"
+dsn = "amuvarma/qa_large_0_5_speechq"
+push_name = "amuvarma/qa_large_0_4_speechqa-both"
 
 ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
 def add_audio(example):
-    text = example['question']
+    text = example['answer']
     voice = random.choice(voices)
     wav = msinference.inference(
         text, 
@@ -31,14 +31,14 @@ def add_audio(example):
     print(wav_16k.shape)
     
     return {
-        'audio': {
+        'answer_audio': {
             'array': wav_16k,
             'sampling_rate': 16000
         }
     }
 
 ds = ds.map(add_audio, batched=False)
-ds = ds.cast_column("audio", Audio(sampling_rate=16000))
+ds = ds.cast_column("answer_audio", Audio(sampling_rate=16000))
 
 
 ds.push_to_hub(push_name)
