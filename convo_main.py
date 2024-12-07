@@ -21,6 +21,7 @@ def add_audio(example):
     try:
         for col in cols_of_interest:
             if not example[col]:
+                print(f"Skipping {col} as it is empty")
                 continue
             text = example[col]
             voice = random.choice(voices)
