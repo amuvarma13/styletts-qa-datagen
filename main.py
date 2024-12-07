@@ -10,11 +10,11 @@ text = 'Hello world!'
 voices_strings = ["f-us-1.wav", "f-us-2.wav", "f-us-3.wav", "f-us-4.wav", "m-us-1.wav", "m-us-2.wav", "m-us-3.wav", "m-us-4.wav"]
 voices = [msinference.compute_style("voices/"+voice) for voice in voices_strings]
 dsn = "amuvarma/voice-assistant-200-250k-processed"
-push_name = "amuvarma/voice-assistant-200-250k-processed-speechqa-both-full"
+push_name = "amuvarma/dev-voice-assistant-200-250k-processed-speechqa-both-full"
 
 ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
-# ds = ds.select(range(20000))
+ds = ds.select(range(100))
 def add_audio(example):
     try:
         text = example['answer']
