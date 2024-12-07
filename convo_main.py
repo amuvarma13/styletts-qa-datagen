@@ -19,6 +19,8 @@ def add_audio(example):
     try:
         cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 'user_5_text', 'user_6_text']
         for col in cols_of_interest:
+            if not example[col]:
+                continue
             text = example[col]
             voice = random.choice(voices)
             wav = msinference.inference(
