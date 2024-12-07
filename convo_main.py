@@ -17,27 +17,29 @@ ds = ds.shuffle(seed=42)
 # ds = ds.select(range(100))
 def add_audio(example):
     try:
-        text = example['answer']
-        voice = random.choice(voices)
-        wav = msinference.inference(
-            text, 
-            voice, 
-            alpha=0.3, 
-            beta=0.7, 
-            diffusion_steps=7, 
-            embedding_scale=1
-        )
-        
-        wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
-        
-        print(wav_16k.shape)
-        
-        return {
-            'answer_audio': {
-                'array': wav_16k,
-                'sampling_rate': 16000
+        cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 'user_5_text', 'user_6_text']
+        for col in cols_of_interest:
+            text = example[col]
+            voice = random.choice(voices)
+            wav = msinference.inference(
+                text, 
+                voice, 
+                alpha=0.3, 
+                beta=0.7, 
+                diffusion_steps=7, 
+                embedding_scale=1
+            )
+            
+            wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
+            
+            print(wav_16k.shape)
+            
+            return {
+                f'{col}_audio': {
+                    'array': wav_16k,
+                    'sampling_rate': 16000
+                }
             }
-        }
     except Exception as e:
         print(f"Failed to process example: {e}")
         return {
