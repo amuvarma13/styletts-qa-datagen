@@ -54,6 +54,7 @@ def add_audio(example):
 
 ds = ds.map(add_audio, batched=False)
 
+print(ds)
 for col in cols_of_interest:
     ds = ds.cast_column(f'{col}_audio', Audio(sampling_rate=16000))
 
