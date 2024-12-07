@@ -40,12 +40,12 @@ def add_audio(example):
             print(wav_16k.shape)
             
             print(f"Adding audio for {col}")
-            return {
-                f'{col}_audio': {
-                    'array': wav_16k,
-                    'sampling_rate': 16000
-                }
+        return {
+            f'{col}_audio': {
+                'array': wav_16k,
+                'sampling_rate': 16000
             }
+        }
     except Exception as e:
         print(f"Failed to process example: {e}")
         return {
