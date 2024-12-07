@@ -44,6 +44,7 @@ def add_audio(example):
                 'array': wav_16k,
                 'sampling_rate': 16000
             }
+        print("Done processing", updated_example)
         return updated_example
     except Exception as e:
         print(f"Failed to process example: {e}")
