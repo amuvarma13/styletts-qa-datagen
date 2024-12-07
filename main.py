@@ -16,27 +16,33 @@ ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
 # ds = ds.select(range(20000))
 def add_audio(example):
-    text = example['answer']
-    voice = random.choice(voices)
-    wav = msinference.inference(
-        text, 
-        voice, 
-        alpha=0.3, 
-        beta=0.7, 
-        diffusion_steps=7, 
-        embedding_scale=1
-    )
-    
-    wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
-    
-    print(wav_16k.shape)
-    
-    return {
-        'answer_audio': {
-            'array': wav_16k,
-            'sampling_rate': 16000
+    try:
+        text = example['answer']
+        voice = random.choice(voices)
+        wav = msinference.inference(
+            text, 
+            voice, 
+            alpha=0.3, 
+            beta=0.7, 
+            diffusion_steps=7, 
+            embedding_scale=1
+        )
+        
+        wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
+        
+        print(wav_16k.shape)
+        
+        return {
+            'answer_audio': {
+                'array': wav_16k,
+                'sampling_rate': 16000
+            }
         }
-    }
+    except Exception as e:
+        print(f"Failed to process example: {e}")
+        return {
+            'answer_audio': None  # Or you could return a default value
+        }
 
 ds = ds.map(add_audio, batched=False)
 ds = ds.cast_column("answer_audio", Audio(sampling_rate=16000))
