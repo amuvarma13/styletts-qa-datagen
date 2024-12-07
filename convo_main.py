@@ -15,9 +15,10 @@ push_name = "amuvarma/conversation-elias-3-0-t120-convo-both-full"
 ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
 # ds = ds.select(range(100))
+cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 'user_5_text', 'user_6_text']
+
 def add_audio(example):
     try:
-        cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 'user_5_text', 'user_6_text']
         for col in cols_of_interest:
             if not example[col]:
                 continue
@@ -49,7 +50,9 @@ def add_audio(example):
         }
 
 ds = ds.map(add_audio, batched=False)
-ds = ds.cast_column("answer_audio", Audio(sampling_rate=16000))
+
+for col in cols_of_interest:
+    ds = ds.cast_column(f'{col}_audio', Audio(sampling_rate=16000))
 
 
 ds.push_to_hub(push_name)
