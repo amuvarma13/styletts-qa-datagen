@@ -19,7 +19,16 @@ cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 
 
 def add_audio(example):
     try:
-        updated_example = {}
+        #first prefill the audio columns with None
+        updated_example = {
+            "user_1_text_audio": None,
+            "user_2_text_audio": None,
+            "user_3_text_audio": None,
+            "user_4_text_audio": None,
+            "user_5_text_audio": None,
+            "user_6_text_audio": None
+        }
+
         for col in cols_of_interest:
             print(f"Processing {col}")  
             if not example[col]:
