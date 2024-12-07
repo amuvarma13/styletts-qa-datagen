@@ -23,8 +23,7 @@ def add_audio(example):
         for col in cols_of_interest:
             print(f"Processing {col}")  
             if not example[col]:
-                print(f"Skipping {col} as it is empty")
-                continue
+                updated_example[f'{col}_audio'] = None
             text = example[col]
             voice = random.choice(voices)
             wav = msinference.inference(
