@@ -19,6 +19,7 @@ cols_of_interest = ['user_1_text', 'user_2_text', 'user_3_text', 'user_4_text', 
 
 def add_audio(example):
     try:
+        updated_example = {}
         for col in cols_of_interest:
             print(f"Processing {col}")  
             if not example[col]:
@@ -40,12 +41,11 @@ def add_audio(example):
             print(wav_16k.shape)
             
             print(f"Adding audio for {col}")
-        return {
-            f'{col}_audio': {
+            updated_example[f'{col}_audio'] = {
                 'array': wav_16k,
                 'sampling_rate': 16000
             }
-        }
+        return updated_example
     except Exception as e:
         print(f"Failed to process example: {e}")
         return {
