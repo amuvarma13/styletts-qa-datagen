@@ -14,7 +14,7 @@ push_name = "amuvarma/dev-voice-assistant-200-250k-processed-speechqa-both-full"
 
 ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
-ds = ds.select(range(100))
+# ds = ds.select(range(100))
 def add_audio(example):
     try:
         text = example['answer']
