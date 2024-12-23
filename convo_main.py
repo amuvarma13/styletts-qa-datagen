@@ -46,15 +46,10 @@ def add_audio(example):
             )
             
             wav_16k = librosa.resample(wav, orig_sr=24000, target_sr=16000)
-            
-            print(wav_16k.shape)
-            
-            print(f"Adding audio for {col}")
             updated_example[f'{col}_audio'] = {
                 'array': wav_16k,
                 'sampling_rate': 16000
             }
-        print("Done processing", updated_example)
         return updated_example
     except Exception as e:
         print(f"Failed to process example: {e}")
