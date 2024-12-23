@@ -9,8 +9,8 @@ nltk.download('punkt_tab')
 text = 'Hello world!'
 voices_strings = ["f-us-1.wav", "f-us-2.wav", "f-us-3.wav", "f-us-4.wav", "m-us-1.wav", "m-us-2.wav", "m-us-3.wav", "m-us-4.wav"]
 voices = [msinference.compute_style("voices/"+voice) for voice in voices_strings]
-dsn = "amuvarma/conversation-elias-3-0-t120"
-push_name = "amuvarma/conversation-elias-3-0-t120-convo-both-full"
+dsn = "aamuvarma/conversation-elias-5-0-t248"
+push_name = "amuvarma/conversation-elias-5-0-t248-convo-both-full"
 
 ds = load_dataset(dsn, split='train')
 ds = ds.shuffle(seed=42)
