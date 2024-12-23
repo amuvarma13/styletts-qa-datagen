@@ -36,6 +36,7 @@ def add_audio(example):
                 updated_example[f'{col}_audio'] = None
                 return updated_example
             text = example[col]
+            print(f"Text: {text}")
             voice = random.choice(voices)
             wav = msinference.inference(
                 text, 
